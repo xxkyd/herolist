@@ -1,6 +1,6 @@
 <template>
   <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h2 class="sub-header">英雄列表</h2>
+    <h2 class="sub-header">装备列表</h2>
     <!-- <a class="btn btn-success" href="add.html">添加</a> -->
     <router-link class="btn btn-success" :to="{name:'heroadd'}">添加</router-link>
     <div class="table-responsive">
@@ -8,18 +8,17 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>姓名</th>
-            <th>性别</th>
+            <th>名称</th>
+            <th>特效</th>
             <th>操作</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(item,index) in list" :key="item.id">
             <td>{{ index + 1 }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.gender }}</td>
+            <td>{{ item.ename }}</td>
+            <td>{{ item.effects }}</td>
             <td>
-              <!-- <a href="edit.html">edit</a> -->
               <router-link :to="{name:'heroedit',params:{id:item.id}}">编辑</router-link>&nbsp;&nbsp;
               <a href="javascript:" @click="del(item.id)">删除</a>
             </td>
@@ -45,9 +44,8 @@ export default {
     // 显示英雄列表数据
     loadData() {
       this.axios
-        .get("heroes")
+        .get("equip")
         .then(res => {
-          console.log(res);
           const { data, status } = res;
           if (status === 200) {
             this.list = data;
@@ -62,11 +60,11 @@ export default {
     // 删除英雄列表数据
     del(id) {
       // 弹框提示是否删除
-      if (!confirm("确实是否删除该英雄")) {
+      if (!confirm("确实是否删除该装备")) {
         return false;
       }
       this.axios
-        .delete(`heroes/${id}`)
+        .delete(`equip/${id}`)
         .then(res => {
           // console.log(res);
           const status = res.status;

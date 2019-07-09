@@ -8,13 +8,17 @@ Vue.use(VueRouter)
 import HeroList from './views/hero/HeroList.vue'
 import HeroAdd from './views/hero/HeroAdd.vue'
 import HeroEdit from './views/hero/HeroEdit.vue'
+
+// 导入装备列表
+import EquipList from './views/equip/EquipList.vue'
 const router = new VueRouter({
   linkActiveClass:'active',
   routes:[
     {path:'/',redirect:{name:'hero'}},
     {name:"hero",path:'/hero',component:HeroList},
     {name:'heroadd',path:'/hero/add',component:HeroAdd},
-    {name:'heroedit',path:'/hero/edit/:id',component:HeroEdit,props:true}
+    {name:'heroedit',path:'/hero/edit/:id',component:HeroEdit,props:true},
+    {name:'equip',path:'/equip',component:EquipList}
   ]
 })
 
